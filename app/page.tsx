@@ -1,65 +1,113 @@
-import Image from "next/image";
+import Matrix from "@/components/matrix";
+import ProjectGrid from "@/components/project-grid";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Plus } from "lucide-react";
+
+type Project = {
+  id: string;
+  nome: string;
+  descricao: string;
+  data_conclusao: string;
+  data_inicio: string;
+  tipo: string;
+  link: string;
+};
 
 export default function Home() {
+  const contato = [
+    {
+      label: "Instagram",
+      value: "@seu_instagram",
+    },
+    {
+      label: "Telefone",
+      value: "(xx)xxxx-xxxx",
+    },
+    {
+      label: "Curriculo",
+      value: "#",
+    },
+    {
+      label: "LinkedIn",
+      value: "#",
+    },
+  ];
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <div className="relative z-0 min-h-screen font-mono text-green-600 dark">
+      {/* Matrix background */}
+      <Matrix />
+      {/* Content */}
+
+      <div className="text-center p-2">
+        <Card className="max-w-xl mx-auto mt-20 mb-5 p-5 border border-green-500 bg-black/10 backdrop-blur-xs text-green-600">
+          <CardHeader>
+            <h1 className="font-semibold text-2xl">Hub de Projetos</h1>
+          </CardHeader>
+          <CardContent>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="text-green-600 border-green-500 font-mono backdrop-blur-xs"
+                >
+                  Contato
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="border-green-500 bg-black/10 backdrop-blur-xs">
+                <DialogTitle className="text-green-600 font-bold font-mono">
+                  Contato
+                </DialogTitle>
+                {contato.map((item) => (
+                  <div
+                    key={item.label}
+                    className="text-green-600 font-mono p-0"
+                  >
+                    <span className="font-semibold text-md mr-2">
+                      {item.label}:
+                    </span>
+                    <span className="text-md">{item.value}</span>
+                  </div>
+                ))}
+                <DialogClose asChild>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="border-green-500 text-green-600 font-mono backdrop-blur-xs bg-black/10 hover:backdrop-blur-3xl hover:bg-black/10 hover:text-white"
+                  >
+                    Fechar
+                  </Button>
+                </DialogClose>
+              </DialogContent>
+            </Dialog>
+          </CardContent>
+        </Card>
+        <Card className="w-full max-w-5xl mx-auto mt-20 mb-5 p-5 border border-green-500 bg-black/10 backdrop-blur-xs">
+          <CardContent className="p-5">
+            <ProjectGrid />
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
