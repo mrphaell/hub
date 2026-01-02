@@ -6,32 +6,9 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Plus } from "lucide-react";
-
-type Project = {
-  id: string;
-  nome: string;
-  descricao: string;
-  data_conclusao: string;
-  data_inicio: string;
-  tipo: string;
-  link: string;
-};
 
 export default function Home() {
   const contato = [
